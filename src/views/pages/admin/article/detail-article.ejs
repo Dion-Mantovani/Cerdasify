@@ -1,0 +1,41 @@
+<%- include('../../../components/header.ejs') %>
+
+<h1>Detail Artikel</h1>
+<hr />
+
+<% if (article) { %>
+<div>
+  <h2><%= article.title %></h2>
+  <p><strong>Author:</strong> <%= article.author %></p>
+  <p><strong>Category:</strong> <%= article.category %></p>
+  <p>
+    <strong>Created At:</strong> <%= article.createdAt ?
+    article.createdAt.toLocaleString() : 'Tanggal tidak tersedia' %>
+  </p>
+  <hr />
+  <div>
+    <p><%= article.content %></p>
+  </div>
+
+  <div style="margin-top: 20px">
+    <a href="<%= decode || '/admin/article'%>" style="margin-right: 10px"
+      ><button>⬅️ Kembali</button></a
+    >
+    <a
+      href="/admin/article/<%= article._id %>/update/?back=<%= encode %>"
+      style="margin-right: 10px"
+      ><button>✏️ Edit</button></a
+    >
+    <form
+      action="/admin/article/<%= article._id %>?_method=DELETE&back=<%= encode %>"
+      method="POST"
+      onsubmit="return confirm('Yakin ingin hapus?')"
+      style="display: inline"
+    >
+      <button type="submit">🗑️ Hapus</button>
+    </form>
+  </div>
+</div>
+<% } else { %>
+<p>Artikel tidak ditemukan.</p>
+<% } %> <%- include('../../../components/footer') %>

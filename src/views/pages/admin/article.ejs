@@ -1,0 +1,57 @@
+<%- include('../../components/header') %>
+
+<main>
+  <section>
+    <h1>Kelola Artikel</h1>
+
+    <a href="/admin/article/add?back=<%= encode %>">
+      <button>+ Tambah Artikel</button>
+    </a>
+    <a href="/admin/dashboard">
+      <button>Kembali</button>
+    </a>
+
+    <table border="1" cellpadding="10" cellspacing="0" style="margin-top: 20px">
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>Judul</th>
+          <th>Kategori</th>
+          <th>Penulis</th>
+          <th>Aksi</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% if (articles && articles.length > 0) { %> <%
+        articles.forEach((article, index) => { %>
+        <tr>
+          <td><%= index + 1 %></td>
+          <td><%= article.title %></td>
+          <td><%= article.category %></td>
+          <td><%= article.author %></td>
+          <td>
+            <a href="/admin/article/<%= article._id %>?back=<%= encode %>"
+              ><button>Lihat</button>
+            </a>
+            |
+            <form
+              action="/admin/article/<%= article._id %>?_method=DELETE"
+              method="POST"
+              onsubmit="return confirm('Yakin ingin hapus?')"
+              style="display: inline"
+            >
+              <button type="submit">Hapus</button>
+            </form>
+          </td>
+        </tr>
+        <% }) %> <% } else { %>
+        <tr>
+          <td colspan="6" style="text-align: center">Belum ada artikel</td>
+        </tr>
+        <% } %>
+      </tbody>
+    </table>
+  </section>
+</main>
+
+<%- include('../../components/footer') %>

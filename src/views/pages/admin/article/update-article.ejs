@@ -1,0 +1,62 @@
+<h2>Edit Artikel</h2>
+
+<form
+  action="/admin/article/<%= article._id %>/update?_method=PUT&back=<%= encode %>"
+  method="POST"
+  onsubmit="return confirm('Apakah Anda yakin ingin memperbarui artikel ini?')"
+>
+  <div>
+    <label for="title">Judul Artikel</label><br />
+    <input
+      type="text"
+      id="title"
+      name="title"
+      value="<%= oldValue?.title || article.title %>"
+      autofocus
+    />
+    <% if (errors?.title) { errors.title.forEach(msg => { %>
+    <span style="color: red"><%= msg %></span> <br />
+    <% })} %>
+  </div>
+
+  <div>
+    <label for="author">Penulis</label><br />
+    <input
+      type="text"
+      id="author"
+      name="author"
+      value="<%= oldValue?.author || article.author %>"
+    />
+    <% if (errors?.author) { errors.author.forEach(msg => { %>
+    <span style="color: red"><%= msg %></span> <br />
+    <% })} %>
+  </div>
+
+  <div>
+    <label for="category">Kategori</label><br />
+    <input
+      type="text"
+      id="category"
+      name="category"
+      value="<%= oldValue?.category || article.category %>"
+    />
+    <% if (errors?.category) { errors.category.forEach(msg => { %>
+    <span style="color: red"><%= msg %></span> <br />
+    <% })} %>
+  </div>
+
+  <div>
+    <label for="content">Konten</label><br />
+    <textarea id="content" name="content" rows="6">
+<%= oldValue?.content || article.content %></textarea
+    >
+    <% if (errors?.content) { errors.content.forEach(msg => { %>
+    <span style="color: red"><%= msg %></span> <br />
+    <% })} %>
+  </div>
+
+  <button type="submit">Update Artikel</button>
+</form>
+<a href="/admin/article/<%= article._id %>?back=<%= encode %>">
+  <button>Kembali</button>
+</a>

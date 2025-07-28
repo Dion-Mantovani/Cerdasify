@@ -1,0 +1,71 @@
+<main>
+  <h1>Tambah Artikel Baru</h1>
+
+  <form
+    action="/admin/article/add?back=<%= encode %>"
+    method="POST"
+    onsubmit="return confirm('Yakin ingin simpan artikel?')"
+  >
+    <div>
+      <label for="title">Judul Artikel:</label><br />
+      <input
+        type="text"
+        id="title"
+        name="title"
+        value="<%= oldValue?.title %>"
+        autofocus
+      />
+    </div>
+    <% if (errors?.title) { errors.title.forEach(msg => { %>
+    <span style="color: red"><%= msg %></span> <br />
+    <% })} %>
+
+    <div>
+      <label for="author">Penulis:</label><br />
+      <input
+        type="text"
+        id="author"
+        name="author"
+        value="<%= oldValue?.author %>"
+      />
+    </div>
+    <% if (errors?.author) { errors.author.forEach(msg => { %>
+    <span style="color: red"><%= msg %></span> <br />
+    <% })} %>
+
+    <div>
+      <label for="category">Kategori:</label><br />
+      <input
+        type="text"
+        id="category"
+        name="category"
+        value="<%= oldValue?.category %>"
+      />
+    </div>
+    <% if (errors?.category) { errors.category.forEach(msg => { %>
+    <span style="color: red"><%= msg %></span> <br />
+    <% })} %>
+
+    <div>
+      <label for="content">Konten:</label><br />
+      <textarea id="content" name="content" rows="8">
+<%= oldValue?.content %></textarea
+      >
+    </div>
+    <% if (errors?.content) { errors.content.forEach(msg => { %>
+    <span style="color: red"><%= msg %></span> <br />
+    <% })} %>
+
+    <!-- <div>
+      <label for="publish">
+        <input type="checkbox" id="publish" name="publish" />
+        Terbitkan artikel
+      </label>
+    </div> -->
+    <br />
+    <button type="submit">Simpan Artikel</button>
+  </form>
+  <a href="<%= decode  || '/admin/article' %>">
+    <button>Kembali</button>
+  </a>
+</main>
